@@ -1,34 +1,110 @@
+// all querySelectors
 const gridContainer = document.querySelector('#gridContainer');
+const clearBtn = document.querySelector('#clearBtn');
+const sizeChanger = document.querySelector('#sizeChanger');
+const sizeDisplay = document.querySelector('#sizeDisplay');
+const colorOptions = document.querySelectorAll('.color');
+const gridLines = document.querySelectorAll('.gridLines');
 
 // a is the number of columns and rows
-let a = 64;
+let a = sizeChanger.value;
+let allGrids;
+let colorSelected = 'black';
 
-gridContainer.style.cssText = `
-    grid-template-columns: repeat(` + a + `, 1fr);
-`;
+resetGrid();
 
-// creates all of the divs for the grid
-for (let i = 0; i < (a ** 2); i++) {
-    const oneGrid = document.createElement('div');
-    gridContainer.appendChild(oneGrid);
-    oneGrid.style.cssText = 'background: white';
-    oneGrid.classList.toggle('one-grid');
+function resetGrid () {
+    displaySize();
+    // actually creates the columns
+    gridContainer.style.cssText = `
+        grid-template-columns: 0;
+        grid-template-columns: repeat(` + a + `, 1fr);
+        gap: 1px;
+    `;
+    // creates all of the divs for the grid
+    gridContainer.innerHTML = '';
+    for (let i = 0; i < (a ** 2); i++) {
+        const oneGrid = document.createElement('div');
+        gridContainer.appendChild(oneGrid);
+        oneGrid.style.cssText = 'background: white';
+        oneGrid.classList.toggle('one-grid');
+    };
+    // updates allGrid variable
+    allGrids = document.querySelectorAll('.one-grid');
+    return;
 }
 
-const allGrids = document.querySelectorAll('.one-grid');
-
-// allGrids will change colors when mouse enters oneGrid
-allGrids.forEach(item => {
-    item.addEventListener('mouseenter', e => {
-        e.target.style.cssText = 'background: black';
+// each grid will change colors when mouse enters oneGrid
+gridContainer.addEventListener('mouseenter', () => {
+    allGrids.forEach(item => {
+        item.addEventListener('mouseenter', e => {
+            e.target.style.cssText = `background: ` + colorSelectedFunction();
+        });
     });
 });
 
 // allGrids will change colors to white
 // when clearBtn is clicked
-const clearBtn = document.querySelector('#clearBtn');
 clearBtn.addEventListener('click', () => {
     allGrids.forEach(item => {
         item.style.cssText = 'background: white';
+    });
+});
+
+// update the sizeChanger's value when slider changes
+sizeChanger.oninput = () => {
+    document.innerHTML = this.value;
+};
+
+// when sizeChanger's value changes, then
+// "a" will also change
+sizeChanger.addEventListener('change', () => {
+    a = sizeChanger.value;
+    resetGrid();
+});
+
+function displaySize () {
+    sizeDisplay.innerHTML = ('Size: ' + a + ' x ' + a);
+    return;
+};
+
+// changes colors
+colorOptions.forEach(item => {
+    item.addEventListener('click', e => {
+        colorSelected = e.target.value;
+    });
+});
+
+function rainbow() {
+    const randomNumber = Math.floor(Math.random() * 6);
+    switch (randomNumber) {
+        case 0:
+            return('red');
+        case 1:
+            return('orange');
+        case 2:
+            return('yellow');
+        case 3:
+            return('green');
+        case 4:
+            return('blue');
+        case 5:
+            return('purple');
+    }
+};
+
+function colorSelectedFunction () {
+    if (colorSelected === 'rainbow') {
+        return(rainbow());
+    } else return(colorSelected);
+};
+
+// turns grid lines on and off
+gridLines.forEach(item => {
+    item.addEventListener('click', e => {
+        gridContainer.style.cssText = `
+        grid-template-columns: 0;
+        grid-template-columns: repeat(` + a + `, 1fr);
+        gap: ` + e.target.value;
     });
 });
