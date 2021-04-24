@@ -83,12 +83,16 @@ button:hover {
     grid-area: 2 / 3 / 3 / 4;
     border: 3vmin solid #1e3d59;
     border-radius: 15px;
-    background-color: #dddddd;
+    background-color: #1e3d59;
     margin: auto;
-    width: 69vmin; /* easy fix to bug */
+    width: 70vmin;
     height: 70vmin;
     display: grid;
     margin: 20px 15px 0px 15px;
+}
+
+.border {
+    border: 1px solid #dddddd;
 }
 
 /* everything below copied and edited from w3schools */

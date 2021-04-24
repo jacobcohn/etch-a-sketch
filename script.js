@@ -21,8 +21,7 @@ function resetGrid () {
         grid-template-columns: 0;
         grid-template-columns: repeat(` + a + `, 1fr);
         grid-template-rows: 0;
-        grid-template-rows: repeat(` + a + `, 1fr);
-        gap:` + gridLinesClass();
+        grid-template-rows: repeat(` + a + `, 1fr);`
     ;
     // creates all of the divs for the grid
     gridContainer.innerHTML = '';
@@ -34,6 +33,7 @@ function resetGrid () {
     };
     // updates allGrid variable
     allGrids = document.querySelectorAll('.one-grid');
+    borderOn();
     return;
 }
 
@@ -118,22 +118,18 @@ colorOptions.forEach(item => {
 gridLines.forEach(item => {
     item.addEventListener('click', e => {
         gridLines.forEach(item => item.classList.toggle('selected'));
-        gridContainer.style.cssText = `
-        grid-template-columns: 0;
-        grid-template-columns: repeat(` + a + `, 1fr);
-        grid-template-rows: 0;
-        grid-template-rows: repeat(` + a + `, 1fr);
-        gap: ` + gridLinesClass();
+        allGrids.forEach(item => item.classList.toggle('border'));
     });
 });
 
 // gives value of whichever gridLines is selected
-function gridLinesClass() {
-    let gridLinesClassResult;
+function borderOn() {
     gridLines.forEach(item => {
         if (item.classList.contains('selected')) {
-            gridLinesClassResult = item.value;
+            if (item.id === 'gridLinesOn') {
+                allGrids.forEach(item => item.classList.toggle('border'));
+            }
         };
     });
-    return(gridLinesClassResult);
+    return;
 };
