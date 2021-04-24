@@ -5,6 +5,7 @@ const sizeChanger = document.querySelector('#sizeChanger');
 const sizeDisplay = document.querySelector('#sizeDisplay');
 const colorOptions = document.querySelectorAll('.color');
 const gridLines = document.querySelectorAll('.gridLines');
+const allBtns = document.querySelectorAll('button'); 
 
 // a is the number of columns and rows
 let a = sizeChanger.value;
@@ -19,8 +20,10 @@ function resetGrid () {
     gridContainer.style.cssText = `
         grid-template-columns: 0;
         grid-template-columns: repeat(` + a + `, 1fr);
-        gap: 1px;
-    `;
+        grid-template-rows: 0;
+        grid-template-rows: repeat(` + a + `, 1fr);
+        gap:` + gridLinesClass();
+    ;
     // creates all of the divs for the grid
     gridContainer.innerHTML = '';
     for (let i = 0; i < (a ** 2); i++) {
@@ -99,12 +102,38 @@ function colorSelectedFunction () {
     } else return(colorSelected);
 };
 
+// changes selected when another color is clicked
+colorOptions.forEach(item => {
+    item.addEventListener('click', e => {
+        colorOptions.forEach(item => {
+            if (item.classList.contains('selected')) {
+                item.classList.toggle('selected');
+            }
+        });
+        item.classList.toggle('selected');
+    });
+});
+
 // turns grid lines on and off
 gridLines.forEach(item => {
     item.addEventListener('click', e => {
+        gridLines.forEach(item => item.classList.toggle('selected'));
         gridContainer.style.cssText = `
         grid-template-columns: 0;
         grid-template-columns: repeat(` + a + `, 1fr);
-        gap: ` + e.target.value;
+        grid-template-rows: 0;
+        grid-template-rows: repeat(` + a + `, 1fr);
+        gap: ` + gridLinesClass();
     });
 });
+
+// gives value of whichever gridLines is selected
+function gridLinesClass() {
+    let gridLinesClassResult;
+    gridLines.forEach(item => {
+        if (item.classList.contains('selected')) {
+            gridLinesClassResult = item.value;
+        };
+    });
+    return(gridLinesClassResult);
+};

@@ -8,30 +8,41 @@
 <body>
     <div id='container'>
         <div id='titleDiv'>
-            <h1 id='title'>HELLO WORLD!</h1>
+            <h1 id='title'>Etch-a-Sketch</h1>
         </div>
-        <div id='sidebarDiv'>
-            <div id='sizeChangerDiv'>
-                <h2 id='sizeDisplay'>HELLO</h2>
-                <input id='sizeChanger' type="range" min="10" max="100" value="50">
+        <div id='sidebarBigDiv'>
+        <div id='sidebarSmallDiv'>
+            <div id='sidebarTitleDiv' class='inSidebar'>
+                <h1 id='sidebarTitle'>Options</h1>
             </div>
-            <div id='clearBtnDiv'>
+            <div id='clearBtnDiv' class='inSidebar'>
                 <button id='clearBtn'>Clear</button>
             </div>
-            <div id='colorChangerDiv'>
-                <button id='black' class='color' value='black'>black</button>
-                <button id='rainbow' class='color' value='rainbow'>rainbow</button>
-                <button id='red' class='color' value='red'>red</button>
-                <button id='orange' class='color' value='orange'>orange</button>
-                <button id='yellow' class='color' value='yellow'>yellow</button>
-                <button id='green' class='color' value='green'>green</button>
-                <button id='blue' class='color' value='blue'>blue</button>
-                <button id='purple' class='color' value='purple'>purple</button>
+            <div id='sizeChangerDiv' class='inSidebar'>
+                <h2 id='sizeDisplay' class='sidebarTitle'></h2>
+                <input id='sizeChanger' type="range" min="10" max="80" value="50">
             </div>
-            <div id='gridLinesDiv'>
-                <button id='gridLinesOn' class='gridLines' value='1px'>On</button>
-                <button id='gridLinesOff' class='gridLines' value='none'>Off</button>
+            <div id='colorChangerDiv' class='inSidebar'>
+                <h2 id='colorChangerTitle' class='sidebarTitle'>Select Color:</h2>
+                <div class=' multipleBtns'>
+                    <button id='black' class='color selected' value='black'>Black</button>
+                    <button id='rainbow' class='color' value='rainbow'>Rainbow</button>
+                    <button id='red' class='color' value='red'>Red</button>
+                    <button id='orange' class='color' value='orange'>Orange</button>
+                    <button id='yellow' class='color' value='yellow'>Yellow</button>
+                    <button id='green' class='color' value='green'>Green</button>
+                    <button id='blue' class='color' value='blue'>Blue</button>
+                    <button id='purple' class='color' value='purple'>Purple</button>
+                </div>
             </div>
+            <div id='gridLinesDiv' class='inSidebar'>
+                <h2 id='gridLinesTitle' class='sidebarTitle'>Grid Lines:</h2>
+                <div class=' multipleBtns'>
+                    <button id='gridLinesOn' class='gridLines selected' value='1px'>On</button>
+                    <button id='gridLinesOff' class='gridLines' value='none'>Off</button>
+                </div>
+            </div>
+        </div>
         </div>
         <div id='gridContainer'></div>
     </div>
