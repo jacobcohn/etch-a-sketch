@@ -1,3 +1,5 @@
+Live Preview: https://jcohn16.github.io/etch-a-sketch/
+
 I am creating an Etch-a-Sketch. 
 Here we go!
 
